@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="http://stuk.github.io/require1k/require1k.min.js"></script>
+    <style>
+        .container {
+            background-color: lightblue;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        function Example({toLoad}) {
+            return (
+                <div className="container" ref={a => R(toLoad, function (err, component) {
+                    if (err) {
+                        a.innerHTML = err.statusText;
+                    } else {
+                        a.appendChild(component());
+                    }
+                })}/>
+            );
+        }
+
+        ReactDOM.render(
+            <Example toLoad="./component"/>,
+            document.getElementById('root')
+        );
+
+    </script>
+  </body>
+</html>
